@@ -37,16 +37,12 @@ while True:
         "What will you do next? Enter 'help' to see some options: ")
     player_input = player_input.lower().split(' ')
 
-    if (player_input[0] == 'north') or (player_input[0] == 'n') or (player_input[0] == 'south') or (player_input[0] == 's') or (player_input[0] == 'west') or (player_input[0] == 'w') or (player_input[0] == 'east') or (player_input[0] == 'e') or (player_input[0] == 'back'):
+    if (player_input[0] == 'north') or (player_input[0] == 'south') or (player_input[0] == 'west') or (player_input[0] == 'east') or (player_input[0] == 'back'):
         player.move(player_input[0])
         print(
             f"***{player.location.name}*** \n ***{player.location.description}***")
 
-    elif ((player_input[0] == 'move') or (player_input[0] == 'go') or (player_input[0] == 'walk')) and ((player_input[1] == 'north') or (player_input[1] == 'n') or (player_input[1] == 'south') or (player_input[1] == 's') or (player_input[1] == 'west') or (player_input[1] == 'w') or (player_input[1] == 'east') or (player_input[1] == 'e') or (player_input[1] == 'back')):
-        player.move(player_input[1])
-        print(f"***{player.location.name}***\n ***{player.location.description}***")
-
-    elif (player_input[0] == 'look') or (player_input[0] == 'room') or (player_input[0] == 'location') or (player_input[0] == 'where') or (player_input[0] == 'explore'):
+    elif (player_input[0] == 'look'):
         print(f"***{player.location.name}*** \n***{player.location.description}***")
     elif (player_input[0] == 'inventory'):
         player.inventory()
@@ -75,7 +71,7 @@ while True:
         break
 
     elif (player_input[0] == 'help') or (player_input[0] == 'commands') or (player_input[0] == 'h'):
-        print("You can 'go north' or any other cardinal direction.")
+        print("You can go ' north' or any other cardinal direction.")
         print("You can 'look' to see the description of the room you are in.")
         print("You can 'search' to try to find any items.")
         print(

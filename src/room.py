@@ -19,6 +19,10 @@ class Room:
             for item in self.items:
                 print(item.name)
 
+    def recieveitem(self, item):
+        self.items.append(item)
+        print(f"You put down the {item.name}.")
+
     def takeitem(self, itemname):
         if next(item for item in self.items if item.name.lower() == itemname):
             item = next(

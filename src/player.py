@@ -55,13 +55,22 @@ class Player:
                 print("You've only just started, there is nowhere to go back to.")
 
     def inventory(self):
-        print("You look over your inventory:")
-        if len(self.items) == 0:
-            print("*** Nothing there ***")
-        else:
+        if len(self.items) > 0:
+            print("You look over your inventory:")
             for item in self.items:
                 print(item.name)
+        else:
+            print("You don't have anything with you.")
 
     def recieveitem(self, item):
         self.items.append(item)
         print(f"You put {item.name} in your inventory.")
+
+    def dropitem(self, itemname):
+        if next(item for item in self.items if item.name.lower() == itemname):
+            item = next(
+                item for item in self.items if item.name.lower() == itemname)
+            self.items.remove(item)
+            return item
+        else:
+            return False
