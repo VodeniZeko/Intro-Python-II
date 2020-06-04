@@ -52,19 +52,19 @@ class Player:
                     self.location = self.location.e_to
                     self.path.pop()
             else:
-                print("You've only just started, there is nowhere to go back to.")
+                print("***You've only just started, there is nowhere to go back to.***")
 
     def inventory(self):
         if len(self.items) > 0:
-            print("You look over your inventory:")
+            print("***You look over your inventory:***")
             for item in self.items:
                 print(item.name)
         else:
-            print("You don't have anything with you.")
+            print("***You don't have anything with you.***")
 
     def recieveitem(self, item):
         self.items.append(item)
-        print(f"You put {item.name} in your inventory.")
+        print(f"***You put {item.name.upper()} in your inventory.***")
 
     def dropitem(self, itemname):
         if next(item for item in self.items if item.name.lower() == itemname):

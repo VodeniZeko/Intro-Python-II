@@ -13,7 +13,7 @@ def load():
     while True:
         name = input("What is your Name? ")
         player = Player(name, rooms['outside'])
-        print(f"Welcome, {player.name}, lets get started")
+        print(f"\n\n\n Welcome, {player.name}, lets get started\n\n\n")
         return player
 
 
@@ -29,7 +29,8 @@ def load():
 #
 # If the user enters "q", quit the game.
 player = load()
-print(f"You are at {player.location.name}, {player.location.description}")
+print(
+    f"\n\n\nYou are {player.location.name}, {player.location.description}\n\n")
 
 
 while True:
@@ -40,10 +41,11 @@ while True:
     if (player_input[0] == 'north') or (player_input[0] == 'south') or (player_input[0] == 'west') or (player_input[0] == 'east') or (player_input[0] == 'back'):
         player.move(player_input[0])
         print(
-            f"***{player.location.name}*** \n ***{player.location.description}***")
+            f"\n\n\n***{player.location.name}*** \n\n\n ***{player.location.description}***\n\n\n\n\n\n")
 
     elif (player_input[0] == 'look'):
-        print(f"***{player.location.name}*** \n***{player.location.description}***")
+        print(
+            f"\n\n\n***{player.location.name}*** \n\n\n***{player.location.description}***\n\n\n\n\n\n")
     elif (player_input[0] == 'inventory'):
         player.inventory()
     elif (player_input[0] == 'search'):
@@ -54,20 +56,20 @@ while True:
             if item:
                 player.recieveitem(item)
             else:
-                print("That item isn't here.")
+                print("***That item isn't here.***")
         else:
-            print("What would you like to take?")
+            print("***What would you like to take?***")
     elif (player_input[0] == 'drop') or (player_input[0] == 'leave'):
         if player_input[1]:
             item = player.dropitem(player_input[1])
             if item:
                 player.location.recieveitem(item)
             else:
-                print("You don't have that item.")
+                print("***You don't have that item.***")
         else:
-            print("What would you like to drop?")
+            print("***What would you like to drop?***")
     elif (player_input[0] == 'q') or (player_input[0] == 'quit'):
-        print("See you next time!")
+        print("***See you next time!***")
         break
 
     elif (player_input[0] == 'help') or (player_input[0] == 'commands') or (player_input[0] == 'h'):

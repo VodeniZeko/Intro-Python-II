@@ -13,15 +13,15 @@ class Room:
 
     def search(self):
         if len(self.items) == 0:
-            print("*** You search the area and found nothing: ***")
+            print("\n\n\n\n*** You search the area and found nothing: ***\n\n\n\n")
         else:
-            print("You search the area and find:")
+            print("***\n\n\n\nYou search the area and find:***")
             for item in self.items:
-                print(item.name)
+                print(item.name.upper())
 
     def recieveitem(self, item):
         self.items.append(item)
-        print(f"You put down the {item.name}.")
+        print(f"***You put down the {item.name.upper()}.***")
 
     def takeitem(self, itemname):
         if next(item for item in self.items if item.name.lower() == itemname):
