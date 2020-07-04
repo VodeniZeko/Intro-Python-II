@@ -1,21 +1,43 @@
 from room import Room
-from rooms import rooms
-from items import items
+
+# Declare all the rooms
+
+room = {
+    'outside':  Room("Outside Cave Entrance",
+                     "North of you, the cave mount beckons"),
+
+    'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
+passages run north and east."""),
+
+    'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
+into the darkness. Ahead to the north, a light flickers in
+the distance, but there is no way across the chasm."""),
+
+    'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
+to north. The smell of gold permeates the air."""),
+
+    'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
+chamber! Sadly, it has already been completely emptied by
+earlier adventurers. The only exit is to the south."""),
+}
+
+
+# Link rooms together
+
+room['outside'].n_to = room['foyer']
+room['foyer'].s_to = room['outside']
+room['foyer'].n_to = room['overlook']
+room['foyer'].e_to = room['narrow']
+room['overlook'].s_to = room['foyer']
+room['narrow'].w_to = room['foyer']
+room['narrow'].n_to = room['treasure']
+room['treasure'].s_to = room['narrow']
 
 #
 # Main
 #
 
-from player import Player
-
-
-def load():
-    while True:
-        name = input("What is your Name? ")
-        player = Player(name, rooms['outside'])
-        print(f"\n\n\n Welcome, {player.name}, lets get started\n\n\n")
-        return player
-
+# Make a new player object that is currently in the 'outside' room.
 
 # Write a loop that:
 #
@@ -24,60 +46,6 @@ def load():
 # * Waits for user input and decides what to do.
 #
 # If the user enters a cardinal direction, attempt to move to the room there.
-# If the user enters 'back' go back one room.
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-player = load()
-print(
-    f"\n\n\nYou are {player.location.name}, {player.location.description}\n\n")
-
-
-while True:
-    player_input = input(
-        "What will you do next? Enter 'help' to see some options: ")
-    player_input = player_input.lower().split(' ')
-
-    if (player_input[0] == 'north') or (player_input[0] == 'south') or (player_input[0] == 'west') or (player_input[0] == 'east') or (player_input[0] == 'back'):
-        player.move(player_input[0])
-        print(
-            f"\n\n\n***{player.location.name}*** \n\n\n ***{player.location.description}***\n\n\n\n\n\n")
-
-    elif (player_input[0] == 'look'):
-        print(
-            f"\n\n\n***{player.location.name}*** \n\n\n***{player.location.description}***\n\n\n\n\n\n")
-    elif (player_input[0] == 'inventory'):
-        player.inventory()
-    elif (player_input[0] == 'search'):
-        player.location.search()
-    elif (player_input[0] == 'get') or (player_input[0] == 'take'):
-        if player_input[1]:
-            item = player.location.takeitem(player_input[1])
-            if item:
-                player.recieveitem(item)
-            else:
-                print("***That item isn't here.***")
-        else:
-            print("***What would you like to take?***")
-    elif (player_input[0] == 'drop') or (player_input[0] == 'leave'):
-        if player_input[1]:
-            item = player.dropitem(player_input[1])
-            if item:
-                player.location.recieveitem(item)
-            else:
-                print("***You don't have that item.***")
-        else:
-            print("***What would you like to drop?***")
-    elif (player_input[0] == 'q') or (player_input[0] == 'quit'):
-        print("***See you next time!***")
-        break
-
-    elif (player_input[0] == 'help') or (player_input[0] == 'commands') or (player_input[0] == 'h'):
-        print("You can go ' north' or any other cardinal direction.")
-        print("You can 'look' to see the description of the room you are in.")
-        print("You can 'search' to try to find any items.")
-        print(
-            "You can 'take [item]' to put an item you find in your inventory, or 'drop [item]'.")
-        print("Type 'quit' to save and quit.")
-    else:
-        print("Didn't recognize that input, try again. Type 'help' to view the list of commands.")
